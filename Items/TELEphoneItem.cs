@@ -2,7 +2,7 @@ using Terraria;
 using Terraria.ID;
 using Terraria.ModLoader;
 
-namespace TELEphone.Items
+namespace TELEphoneMod.Items
 {
     public class TELEphoneItem : ModItem
     {

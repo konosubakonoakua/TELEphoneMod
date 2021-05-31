@@ -3,5 +3,7 @@ which gives you ability to teleport to anywhere
 pressing right mouse button when openning full-screen map.
 
 Cuation: player will have a confused debuff lasting for about 3 seconds after teleportion.
+Ingredients: MagicMirror、Teleporter*99、TriFold
 
 全屏地图右键传送，传完会有几秒的困惑 Debuff，效果可以被饰品免疫。
+制作：魔镜、传送机*99、三折地图

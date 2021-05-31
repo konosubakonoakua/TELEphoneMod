@@ -3,7 +3,7 @@ using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
 
 
-namespace TELEphone
+namespace TELEphoneMod
 {
     public class TELEphone : Mod
     {
