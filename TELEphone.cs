@@ -1,7 +1,7 @@
 using Terraria;
 using Terraria.ModLoader;
 using Microsoft.Xna.Framework;
-
+using ReLogic.Graphics;
 
 namespace TELEphoneMod
 {
@@ -10,7 +10,9 @@ namespace TELEphoneMod
         public static bool isMapTeleporterValid = false;
 
         public override void PostDrawFullscreenMap(ref string mouseText)
-        {
+{
+            Main.spriteBatch.DrawString(Main.fontMouseText, "RightClickToTeleport", new Vector2(15, Main.screenHeight - 80), Color.White);
+            Terraria.GameInput.PlayerInput.SetZoom_Unscaled();
             if (Main.mouseRight)// && Main.keyState.IsKeyUp(Microsoft.Xna.Framework.Input.Keys.LeftControl))
             {
                 Player player = Main.player[Main.myPlayer];
@@ -46,11 +48,19 @@ namespace TELEphoneMod
                 if (cursorWorldPosition.Y < 0) cursorWorldPosition.Y = 0;
                 else if (cursorWorldPosition.Y + player.height > mapHeight) cursorWorldPosition.Y = mapHeight - player.height;
         
-                
-                player.Teleport(cursorWorldPosition, 1, 0);
-                player.position = cursorWorldPosition;
-                player.velocity = Vector2.Zero;
-                player.fallStart = (int)(player.position.Y / 16f);
+                if (Main.netMode == 0)
+                {
+                    player.Teleport(cursorWorldPosition, 1, 0);
+                    player.position = cursorWorldPosition;
+                    player.velocity = Vector2.Zero;
+                    player.fallStart = (int)(player.position.Y / 16f); 
+                }
+                else // client mode
+                {
+                    NetMessage.SendData(65, -1, -1, null, 0, player.whoAmI, cursorWorldPosition.X, cursorWorldPosition.Y, 1, 0, 0);
+                }
+
+
             }
 
             base.PostDrawFullscreenMap(ref mouseText);
